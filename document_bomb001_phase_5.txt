@@ -28,7 +28,7 @@ Dump of assembler code for function phase_5:
    0x00000000004010b4 <+51>:    and    $0xf,%eax // eax = 0xf & eax
    0x00000000004010b7 <+54>:    mov    %eax,(%rsp) // rsp = eax
    0x00000000004010ba <+57>:    cmp    $0xf,%eax
-   0x00000000004010bd <+60>:    je     0x4010ee <phase_5+109> // if(0xf != eax) then bomb explode
+   0x00000000004010bd <+60>:    je     0x4010ee <phase_5+109> // if(0xf == eax) then bomb explode
    0x00000000004010bf <+62>:    mov    $0x0,%ecx // ecx = 0
    0x00000000004010c4 <+67>:    mov    $0x0,%edx // edx = 0
    0x00000000004010c9 <+72>:    add    $0x1,%edx //edx = 1
@@ -158,3 +158,43 @@ ds             0x0                 0
 es             0x0                 0
 fs             0x0                 0
 gs             0x0                 0
+
+
+
+
+
+***************************************************** Solution code ***********************************************************************
+int numArray[15] = {10, 2, 14, 7, 8, 12, 15, 11, 0, 4, 1, 13, 3, 9, 6};
+
+if(eax > 0x1){
+	eax = rsp
+	eax = 0xf & eax
+	rsp = eax
+	if(0xf != eax){
+		ecx = 0
+		edx = 0
+		do {
+			edx = (edx + 0x1)
+			eax = numArray[eax]
+			ecx = (ecx + eax)
+		}while (eax != 0xf)
+
+		if(0xf != eax){
+			explode()
+		}
+		else{
+			if(ecx == *(rsp+4)){
+				defuse()
+			}
+			else{
+				explode()
+			}
+		}	
+	}
+	else{
+		explode()
+	}
+}
+else{
+	explode()
+}

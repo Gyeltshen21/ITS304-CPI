@@ -130,6 +130,48 @@ main (argc=<optimized out>, argv=<optimized out>) at bomb.c:96
 96          phase_defused();
 (gdb)
 
+**************************************************************Conculsion**********************************************************************
+if(0x2 != eax){
+	explode()
+}
+else{
+	if(0xe > rsp){
+		edx = 14
+		esi = 0
+		func(){
+			if(ebc <= edi){
+				eax = ebx
+				if(ebx >= edi){
+					eax = eax + ebx
+					return eax
+					
+				}	
+			}
+			else{
+				edx = rbx - 1
+				func()
+			}
+		}
+		return eax
+		if(eax != 0x23){
+			explode()
+		}
+		else{
+			if(0x23 == (0x4+rsp)){
+				defuse()
+			}
+			else{
+				explode()
+			}
+		}	
+	}
+	else{
+		explode()
+	}
+}
+
+
+
 
 
 
